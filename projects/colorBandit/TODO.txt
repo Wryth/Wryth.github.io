@@ -1,0 +1,5 @@
+
+
+-Add slight fade in on the color change?
+-Add low more arms, r0-125, r126-250, etc?
+- Consider multiplying the beta parameters by som exponent in order to have a expoential growth rather then linear.

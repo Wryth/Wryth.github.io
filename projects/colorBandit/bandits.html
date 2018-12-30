@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script> <!-- include jStat, from the CDN-->
+    <script src="banditsScript.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <title>ColorBandits</title>
+  </head>
+
+  <body>
+
+    <div id="box">
+      <p>Do you like this color?</p>
+      <button id="yes" onclick="success()" type="button">Yes</button>
+      <button id="no" onclick="fail()" type="button">No</button>
+      <p id="currentColor"></p>
+    </div>
+  </body>
+</html>

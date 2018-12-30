@@ -1,0 +1,23 @@
+body{
+  background-color: lightblue;
+}
+
+#box{
+  margin:15%;
+}
+
+button{
+  margin: auto;
+  height: 50px;
+  width: 25%;
+}
+
+p{
+  margin: auto;
+  width: 25%;
+
+}
+
+#no, #yes{
+  display: block;
+}
