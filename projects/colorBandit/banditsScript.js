@@ -38,25 +38,18 @@ function betaSampler(wlist,llist){
 }
 
 function tsampler(wlist,llist) {
-  //var samples = wlist.map((x,i) => jStat.beta.sample(x,llist[i]));
   return indexOfMax(betaSampler(wlist,llist));
 }
 
 function success() {
     var index = id;
     w[index] = w[index] + 1;
-    console.log(index);
-    console.log(w);
-    console.log(l);
     select();
 }
 
 function fail() {
   var index = id;
   l[index] = l[index] + 1;
-  console.log(index);
-  console.log(w);
-  console.log(l);
   select();
 }
 
@@ -74,37 +67,4 @@ function betaColors(wlist,llist){
   var rgbs = betas.map(x => Math.floor(x*250));
   console.log(rgbs[0] + " " + rgbs[1] + " " + rgbs[2]);
   return rgbs;
-}
-
-///-------------- Other MAB algorithms, should be exported to another script--------------------
-
-function greed(wlist, llist){
-  var result = new Array();
-  for (var i = 0; i < wlist.length; i++) {
-    result[i] = wlist[i]/llist[i];
-  }
-  return result;
-}
-
-function egreedy(e,wlist,llist){
-  if(Math.random() >= e){
-    pick = Math.floor(Math.random() * Math.floor(wlist.length));
-  } else {
-    pick = indexOfMax(greed(wlist,llist));
-  };
-  return pick;
-}
-
-function upperbound(step, numPlays) {
-  return Math.sqrt(2 * Math.log(step + 1) / numPlays);
-}
-
-//Upper Confidence Bound
-function ucb(wlist,llist) {
-  var samples = [];
-  step = wlist.reduce((a,b) => a+b,0) + llist.reduce((a,b) => a+b,0) - wlist.length * 2 + 1;
-  for (var i = 0; i < wlist.length; i++) {
-    samples[i] = wlist[i]/llist[i] + upperbound(step,wlist[i]+l[i]);
-  };
-  return samples;
 }

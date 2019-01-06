@@ -1,5 +1,22 @@
+header{
+  display: block;
+  position: fixed;
+  background-color: black ;
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  height: 5%;
+}
+
+* {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+  text-align: center;
+}
+
 body{
-  background-color: lightblue;
+  background-color: black;
+  z-index: 0;
 }
 
 #box{
@@ -8,16 +25,29 @@ body{
 
 button{
   margin: auto;
+  background-color:whitesmoke;
   height: 50px;
   width: 25%;
+  border-radius: 0%;
 }
 
 p{
   margin: auto;
   width: 25%;
-
+  position: relative;
 }
 
 #no, #yes{
   display: block;
+}
+
+footer{
+  display: block;
+  position: fixed;
+  background-color: black;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 5%;
 }
