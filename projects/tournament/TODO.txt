@@ -3,18 +3,16 @@ Out of N contenders, n qualifies(longest throw of 3) and moves on to brackets de
 - Store  round losers/winners and throws
 
 
+Add cookies, so that the tournament progress is not lost when ever the page is refreshed.
 
-Tree:
+add warnings to wrong inputs etc
+
+
+qualification:
 	Configure inital bracket depening on ranking.
-	Let throw length determen who progresses.
-	Add losers bracket, sorted by throw lenght.
+	The lucky losers should be icorporated in the final tree.
 
-Total mål:
-	Les CSV fil, med navn og ranking(Venter med denne enn så lenge)
-	Lag tree struktur slik at Den best går mot den dårligste etc
-	flytt vinneren videre, og noter lengden på kastet på taperen
-	Flytt taperen ned til en taper liste som bli sortert ut i fra kast lengden.
 
-js:
+bracket library:
 	http://www.aropupu.fi/bracket/
 	Tournament Brackets library
