@@ -1,33 +1,27 @@
-
 $(document).ready(function() {
     console.log("ready!");
-    select();
+    banditNameSpace.select();
 });
 
-var w = new Array(1,1,1);
-var l = new Array(1,1,1);
-var id = "";
+banditNameSpace = function(){
 
-//Return the index of the maximum value.
-function indexOfMax(arr) {
-    if (arr.length === 0) {
-        return -1;
+// private variables.
+var wins = new Array(1,1,1);
+var loss = new Array(1,1,1);
+var bSample = [0,0,0];
+var bMean = [0,0,0];
+var palette = [];
+
+function betaMean(wlist,llist) {
+  var meanColor = wlist.map(
+    function(x,i){
+      return(jStat.beta.mean(x,llist[i]))
     }
-    var max = arr[0];
-    var maxIndex = 0;
-    for (var i = 1; i < arr.length; i++) {
-        if (arr[i] > max) {
-            maxIndex = i;
-            max = arr[i];
-        } else if (arr[i] == max) { //break tie
-            coin = [i, maxIndex]
-            rand = Math.floor(Math.random() * Math.floor(coin.length));
-            maxIndex = coin[rand];
-        }
-    }
-    return maxIndex;
+  );
+  return meanColor;
 }
 
+// draws a random beta samples.
 function betaSampler(wlist,llist){
   var samples = wlist.map(
     function(x,i){
@@ -37,34 +31,87 @@ function betaSampler(wlist,llist){
   return samples;
 }
 
-function tsampler(wlist,llist) {
-  return indexOfMax(betaSampler(wlist,llist));
-}
-
+// move distribution mean towards sample.
 function success() {
-    var index = id;
-    w[index] = w[index] + 1;
+    wins = wins.map((x, i) => x + praisAndBlame(bMean,bSample)[i]);
+    loss = loss.map((x, i) => x + praisAndBlame(bSample,bMean)[i]);
     select();
 }
 
+// move distribution mean away from sample.
 function fail() {
-  var index = id;
-  l[index] = l[index] + 1;
+  loss = loss.map((x, i) => x + praisAndBlame(bMean,bSample)[i]);
+  wins = wins.map((x, i) => x + praisAndBlame(bSample,bMean)[i]);
   select();
 }
 
-//Select the prime rgb color.
+//Generate the next color.
 function select() {
-  var rgbs = betaColors(w,l);
-  id = indexOfMax(rgbs);
-  document.body.style.backgroundColor = "rgb(" + rgbs[0] + "," + rgbs[1] + "," + rgbs[2] + ")";
-  document.getElementById("currentColor").innerText = "rgb(" + rgbs[0] + "," + rgbs[1] + "," + rgbs[2] + ")"
+  bSample = betaSampler(wins,loss);
+  bMean = betaMean(wins,loss);
+  var meanrgbs = bMean.map(x => Math.floor(x*250));
+  var rgbs = bSample.map(x => Math.floor(x*250));
+  setColors(meanrgbs, rgbs);
 }
 
-//Generates rbs colors out of a Beta sample.
-function betaColors(wlist,llist){
-  var betas = betaSampler(wlist,llist);
-  var rgbs = betas.map(x => Math.floor(x*250));
-  console.log(rgbs[0] + " " + rgbs[1] + " " + rgbs[2]);
-  return rgbs;
+// Applies selected colors to the DOM.
+function setColors(meanrgbs, rgbs) {
+  document.getElementById("colorBox").style.backgroundColor = "rgb(" + rgbs[0] + "," + rgbs[1] + "," + rgbs[2] + ")";
+  document.getElementById("sampleColor").innerText = "Sample Color: rgb(" + rgbs[0] + "," + rgbs[1] + "," + rgbs[2] + ")";
+  document.getElementById("meanColor").innerText = "Mean Color: rgb(" + meanrgbs[0] + "," + meanrgbs[1] + "," + meanrgbs[2] + ")";
 }
+
+// reward or punish depending on the relationship mean has to sample.
+function praisAndBlame(mean,sample) {
+  var reward = sample.map(function(x,i) {
+    var value = 0;
+    if (x > mean[i]) {
+      value = 1;
+    }
+    return value;
+  });
+  return reward;
+}
+
+// move the current collor to the pallet.
+function saveColor() {
+  var rgbColor = bSample.map(x => Math.floor(x*250));
+  palette.push(rgbColor);
+  console.log(palette);
+  showPalette();
+}
+
+function showPalette(){
+  for (let i = 0; i < palette.length; i++) {
+    let id = "color" + i;
+    document.getElementById(id).style.backgroundColor = "rgb(" + palette[i][0] + "," + palette[i][1] + "," + palette[i][2] + ")";
+    //document.getElementById(id).innerText = "rgb(" + palette[i][0] + "," + palette[i][1] + "," + palette[i][2] + ")"; // Text does not shale right yet.
+  }
+}
+
+//reset beta distributions.
+function resetBeta() {
+  wins = [1,1,1];
+  loss = [1,1,1];
+  select();
+}
+
+// EventListeners
+window.onload = function (){
+
+  document.getElementById("likeButton").addEventListener("click", success);
+  document.getElementById("nopeButton").addEventListener("click", fail);
+  document.getElementById("superButton").addEventListener("click", saveColor);
+  document.getElementById("resetButton").addEventListener("click", resetBeta);
+  document.getElementById("infoButton").addEventListener("click", (function () {alert("Use the Like and Nope button to find a color you like. You can save a color to your palette by clicking the save button.")}));
+  };
+
+return{
+  select:select,
+  success:success,
+  fail:fail,
+  saveColor:saveColor,
+  resetBeta:resetBeta
+
+}
+}();

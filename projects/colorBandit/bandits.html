@@ -12,16 +12,28 @@
 
   <body>
     <header>
+      <button id="resetButton" class="pickerButtonClass" type="button">Reset</button>
+      <button id="infoButton" class="pickerButtonClass">info</button>
     </header>
 
-    <div id="box">
-      <p>Do you like this color?</p>
-      <button id="yes" onclick="success()" type="button">Like</button>
-      <button id="no" onclick="fail()" type="button">Nope</button>
-      <p id="currentColor"></p>
+    <div id="color0" class="paletteColors"></div>
+    <div id="color1" class="paletteColors"></div>
+    <div id="color2" class="paletteColors"></div>
+    <div id="color3" class="paletteColors"></div>
+    <div id="color4" class="paletteColors"></div>
+
+    <div id="colorBox">
+      <div id="box">
+      <p>Would you like more of this color?</p>
+      <p id="sampleColor"></p>
+      <p id="meanColor"></p>
+      </div>
     </div>
 
     <footer>
+          <button id="nopeButton" class="pickerButtonClass" type="button">Nope</button>
+          <button id="superButton" class="pickerButtonClass" type="button">Save</button>
+          <button id="likeButton" class="pickerButtonClass" type="button">Like</button>
     </footer>
   </body>
 </html>

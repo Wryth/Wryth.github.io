@@ -1,12 +1,16 @@
+body{
+  background-color: ivory;
+}
+
 header{
   display: block;
   position: fixed;
-  background-color: black ;
+  background-color: ivory ;
   left: 0;
   top: 0;
   width: 100%;
   text-align: center;
-  height: 5%;
+  height: 10%;
 }
 
 * {
@@ -14,40 +18,53 @@ header{
   text-align: center;
 }
 
-body{
-  background-color: black;
-  z-index: 0;
+#paletteList{
+  position: fixed;
+  left: 0;
+  top: 15%;
+}
+
+.paletteColors{
+  position: sticky;
+  background-color: ivory;
+  height: 50px;
+  width: 2.5%;
+  bottom: 20%;
+  float: left;
+  left: 0;
+}
+
+#colorBox{
+  position: fixed;
+  top: 10%;
+  left: 2.5%;
+  width: 95%;
+
+  height: 80%;
+  background-color: red;
+  border-radius: 25px;
 }
 
 #box{
-  margin:15%;
+  position: fixed;
+  left: 45%;
+  top: 45%;
 }
 
-button{
-  margin: auto;
-  background-color:whitesmoke;
-  height: 50px;
-  width: 25%;
-  border-radius: 0%;
-}
-
-p{
-  margin: auto;
-  width: 25%;
-  position: relative;
-}
-
-#no, #yes{
-  display: block;
+.pickerButtonClass{
+  background-color:white;
+  height: 50%;
+  width: 50px;
+  border-radius: 20px;
 }
 
 footer{
   display: block;
   position: fixed;
-  background-color: black;
+  background-color: ivory;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
-  height: 5%;
+  height: 10%;
 }
