@@ -73,19 +73,40 @@ function praisAndBlame(mean,sample) {
   return reward;
 }
 
+// Returns true if arr has the same color as any saved palette color.
+function colorIsEqual(arr) {
+  var result = false;
+  for (let n = 0; n < palette.length; n++) {
+    var equalCount = 0;
+    for (let i = 0; i < palette[n].length; i++) {
+      if (palette[n][i] === arr[i]) {
+        equalCount = equalCount + 1;
+      }
+    }
+    if (equalCount === 3) {
+      result = true;  
+      break;  
+    }
+  }
+  return result;
+}
+
 // move the current collor to the pallet.
 function saveColor() {
   var rgbColor = bSample.map(x => Math.floor(x*250));
-  palette.push(rgbColor);
+  if (!colorIsEqual(rgbColor)) {
+    palette.push(rgbColor);
+  };
   console.log(palette);
   showPalette();
 }
 
+// add each pallet color to an html associated element.
 function showPalette(){
   for (let i = 0; i < palette.length; i++) {
-    let id = "color" + i;
+    let id = "palettePos" + i;
     document.getElementById(id).style.backgroundColor = "rgb(" + palette[i][0] + "," + palette[i][1] + "," + palette[i][2] + ")";
-    //document.getElementById(id).innerText = "rgb(" + palette[i][0] + "," + palette[i][1] + "," + palette[i][2] + ")"; // Text does not shale right yet.
+    //document.getElementById(id).innerText = "rgb(" + palette[i][0] + "," + palette[i][1] + "," + palette[i][2] + ")"; // Text does not scale right yet.
   }
 }
 
@@ -103,7 +124,16 @@ window.onload = function (){
   document.getElementById("nopeButton").addEventListener("click", fail);
   document.getElementById("superButton").addEventListener("click", saveColor);
   document.getElementById("resetButton").addEventListener("click", resetBeta);
-  document.getElementById("infoButton").addEventListener("click", (function () {alert("Use the Like and Nope button to find a color you like. You can save a color to your palette by clicking the save button.")}));
+
+  document.getElementById("infoButton").addEventListener("click", (function () {alert("Use the Like and Nope button to find a color you like. \nYou can save a color to your palette by clicking the save button. \nThe reset button restarts the color selection path.")}));
+  
+  document.getElementById("exportPaletteButton").addEventListener("click", (function() {alert("" +
+    document.getElementById("palettePos0").style.backgroundColor + "\n" +
+    document.getElementById("palettePos1").style.backgroundColor + "\n" +
+    document.getElementById("palettePos2").style.backgroundColor + "\n" +
+    document.getElementById("palettePos3").style.backgroundColor + "\n" +
+    document.getElementById("palettePos4").style.backgroundColor + "");
+  }));
   };
 
 return{

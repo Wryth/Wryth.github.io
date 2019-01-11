@@ -18,19 +18,14 @@ header{
   text-align: center;
 }
 
-#paletteList{
-  position: fixed;
-  left: 0;
-  top: 15%;
-}
 
 .paletteColors{
   position: sticky;
   background-color: ivory;
   height: 50px;
   width: 2.5%;
-  bottom: 20%;
   float: left;
+  top: 20%;
   left: 0;
 }
 
