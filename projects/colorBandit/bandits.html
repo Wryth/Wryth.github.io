@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script> <!-- include jStat, from the CDN-->
+    <script src="banditsScript.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <title>ColorBandits</title>
+  </head>
+
+  <body>
+    <header>
+      <button id="exportPaletteButton" class="pickerButtonClass" type="button">Export</button>
+      <button id="resetButton" class="pickerButtonClass" type="button">Reset</button>
+      <button id="infoButton" class="pickerButtonClass" type="button">info</button>
+    </header>
+
+    <div id="palettePos0" class="paletteColors"></div>
+    <div id="palettePos1" class="paletteColors"></div>
+    <div id="palettePos2" class="paletteColors"></div>
+    <div id="palettePos3" class="paletteColors"></div>
+    <div id="palettePos4" class="paletteColors"></div>
+
+    <div id="colorBox"><!--Change to colorCard, create a shadesBox/tintBox-->
+      <div id="box">
+      <p>Would you like more of this color?</p>
+      <p id="sampleColor"></p>
+      <p id="meanColor"></p>
+      </div>
+    </div>
+
+    <footer>
+          <button id="nopeButton" class="pickerButtonClass" type="button">Nope</button>
+          <button id="superButton" class="pickerButtonClass" type="button">Save</button>
+          <button id="likeButton" class="pickerButtonClass" type="button">Like</button>
+    </footer>
+  </body>
+</html>

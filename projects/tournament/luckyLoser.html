@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="jquery-csv.js"></script>
+    <script src="llScript.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <title>Lucky Loser</title>
+  </head>
+
+  <body>
+    <h1 id="id01">Lucky Loser</h1>
+    <div id="status"></div>
+
+    <button id="settings" onclick="trigModal()">Settings</button>
+
+    <div id="myModal" class="modal">
+
+      <div class="modal-content">
+        <h3>Settings</h3>
+        <p>Please insert the contenders, seperated with a ",".</p>
+        <p>The total amount of contenders must be base 2 numbers e.g(2,4,8,16,..)</p>
+        <input type="text" id="playerText" value="p1,p2,p3,p4,p5,p6,p7,p8">
+        <!--<input type="file" id="myFile">-->
+        
+
+        <button id="hideModal" onclick="hideModal()">Continue</button>
+      </div>
+    </div>
+
+    <div id="box"></div>
+    <div id="loserbracket"></div>
+
+</body>
+</html>

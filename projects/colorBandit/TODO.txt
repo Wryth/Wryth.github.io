@@ -1,0 +1,30 @@
+Add the saved pallet colors as blocks around or at the side. Which occupies the whole side, unless another is added
+Then they both take 50%., then 33%, then 25% etc...
+When saving palette colors they should "create" the website.
+
+Creat palette element and let the colors float in that div rather then postition indivudual boxes.
+
+Add shades/tint etc display and choice as a "select" option.
+	- When a button is clicked the color "card" positions is covered in selecable boxes containg different increment of the
+	current color. Should be able to select the increment of choice and click a button that replaces the card whit this color instead.
+
+
+Considered future options: 
+	- adding "super like" button which applifies the normal like/dislike button.
+	- Relative rewards rather than static ones. a rare but meaningfull sample weight more maybe? 
+
+
+Tinder parodie of color selections. "Find Your match"
+	- move buttons to footer, add save button.
+	- "inspect color" lets you se different shades of the color and select one to save.
+
+
+add additional layer of colors in order to creae N color combinations just by "like/dislike".
+	-"Save color" function, sets an element with the saved color.
+		- As a box around? or a block at the left/right?
+
+
+
+Spitout the mean color of the beta distributions?
+
+Maybe add swipe left right functions.

@@ -1,0 +1,65 @@
+body{
+  background-color: ivory;
+}
+
+header{
+  display: block;
+  position: fixed;
+  background-color: ivory ;
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  height: 10%;
+}
+
+* {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+  text-align: center;
+}
+
+
+.paletteColors{
+  position: sticky;
+  background-color: ivory;
+  height: 50px;
+  width: 2.5%;
+  float: left;
+  top: 20%;
+  left: 0;
+}
+
+#colorBox{
+  position: fixed;
+  top: 10%;
+  left: 2.5%;
+  width: 95%;
+
+  height: 80%;
+  background-color: red;
+  border-radius: 25px;
+}
+
+#box{
+  position: fixed;
+  left: 45%;
+  top: 45%;
+}
+
+.pickerButtonClass{
+  background-color:white;
+  height: 50%;
+  width: 50px;
+  border-radius: 20px;
+}
+
+footer{
+  display: block;
+  position: fixed;
+  background-color: ivory;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 10%;
+}

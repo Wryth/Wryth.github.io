@@ -1,0 +1,18 @@
+Out of N contenders, n qualifies(longest throw of 3) and moves on to brackets depending on preexisting ranking.
+- Create qualifier rounds
+- Store  round losers/winners and throws
+
+
+Add cookies, so that the tournament progress is not lost when ever the page is refreshed.
+
+add warnings to wrong inputs etc
+
+
+qualification:
+	Configure inital bracket depening on ranking.
+	The lucky losers should be icorporated in the final tree.
+
+
+bracket library:
+	http://www.aropupu.fi/bracket/
+	Tournament Brackets library
