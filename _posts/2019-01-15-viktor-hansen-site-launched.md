@@ -4,4 +4,5 @@ title: "Viktor Hansen, Launches Site"
 date: 2019-01-15
 ---
 
-Well. Finally got around to putting this old website together. Neat thing about it - powered by [Jekyll](http://jekyllrb.com) and I can use Markdown to author my posts. It actually is a lot easier than I thought it was going to be.
+A quick and simple website made with tools such as JavaScript, HTML, CSS and [Jekyll](http://jekyllrb.com). This site is made in order to have a single focal point where I can share small projects or thoughts.
+I am considering rebuilding the site with [Angular](https://angular.io/) or some other framwork at a later point as practice, but since Jekyll is integrated in [github pages](https://pages.github.com/) it makes usefull for a quick minimum viable product.
