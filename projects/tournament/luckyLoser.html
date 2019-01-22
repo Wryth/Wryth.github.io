@@ -2,7 +2,8 @@
 <html>
   <head>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <script src="jquery-csv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script><!--csv reading library-->
+    <script src="moduleOne.js"></script>
     <script src="llScript.js"></script>
     <link rel="stylesheet" href="styles.css">
 
@@ -11,27 +12,34 @@
   </head>
 
   <body>
-    <h1 id="id01">Lucky Loser</h1>
+    <h1 id="tournamentH1">Lucky Loser</h1>
     <div id="status"></div>
 
-    <button id="settings" onclick="trigModal()">Settings</button>
+    <button id="settings">Settings</button>
 
-    <div id="myModal" class="modal">
+    <div id="settingsModal" class="modal">
 
       <div class="modal-content">
         <h3>Settings</h3>
-        <p>Please insert the contenders, seperated with a ",".</p>
-        <p>The total amount of contenders must be base 2 numbers e.g(2,4,8,16,..)</p>
-        <input type="text" id="playerText" value="p1,p2,p3,p4,p5,p6,p7,p8">
-        <!--<input type="file" id="myFile">-->
+        <p>Import a 2 column("player, rank"), with powers of 2 rows csv file e.g(2,4,8,16,..).</p>
+        <div>
+          <input type="file" id="input" accept=".csv">
+            <input id="exampleCheckbox" type="checkbox">
+            <span>Use example dataset?</span>
+        </div>
         
 
-        <button id="hideModal" onclick="hideModal()">Continue</button>
+        <button id="hideModal">Continue</button>
       </div>
     </div>
 
-    <div id="box"></div>
-    <div id="loserbracket"></div>
+    <div id="box">
+      <div id="finals"></div>    
+      <div id="loserbracketBox">
+        <h2>Loser bracket</h2>
+        <div id="loserbracket"></div>
+      </div>
+    </div>
+  </body>
 
-</body>
 </html>

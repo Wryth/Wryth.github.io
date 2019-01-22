@@ -1,32 +1,49 @@
-
 $(document).ready(function() {
     console.log("ready!");
-    //var data = $.csv.toObjects(csv);
-    //console.log(data);
-    
-    trigModal();
+    tournamentNameSpace.trigModal();
 });
+
+// Revealing module module pattern.
+tournamentNameSpace = function(){
+
+  var playerObjectList = [];
+  var data = null;
 
 // Triggers the settings option Modal.
 function trigModal(){
-  document.getElementById("myModal").style.display = "block";
+  document.getElementById("settingsModal").style.display = "block";
 }
 
 // initiates tournament setup.
 function hideModal(){
-  var playersList = convertText();
-  playerObjectList = createPlayerList(playersList);
-  console.log(playerObjectList);
+  var isChecked = document.getElementById("exampleCheckbox").checked;
+  if (isChecked) {
+    playerObjectList = setEightPlayers();
+  } else {
+    playerObjectList = createPlayerList(data);
+  }
   setup(playerObjectList);
-  document.getElementById("myModal").style.display = "none";
+  document.getElementById("settingsModal").style.display = "none";
 }
 
-// Creates an array of the user input players.
-function convertText(){
-  var newPlayers = document.getElementById("playerText").value;
-  var playersList = newPlayers.split(",");
-  console.log(playersList);
-  return playersList;
+// Method that reads and processes the selected file
+function upload(evt) {
+  data = null; // Module variable, will be changed to a return value.
+  var file = evt.target.files[0];
+  var reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = function(event) {
+  var csvData = event.target.result;
+    data = $.csv.toObjects(csvData);
+    if (data && data.length > 0) {
+      alert('Imported -' + data.length + '- rows successfully!');
+      } else {
+      alert('No data to import!');
+      }
+    reader.onerror = function() {
+    alert('Unable to read ' + file.fileName);
+    };
+  };
 }
 
 // Creates the match and round html elements for a tournament.
@@ -54,27 +71,40 @@ function setRounds(players){
   var nMatches = players.length;
   for (var i = 0; i < rounds; i++) {
     html = html + "<div id=round" + i + ">";
+
     html = html + setMatches(nMatches,i,players) + "</div>";
     nMatches = nMatches/2;
   }
-  document.getElementById("box").innerHTML = html;
+  document.getElementById("finals").innerHTML = html;
 }
 
 // creates html elements for each matchup.
 function setMatches(numbPlayers,round,players){
   var html = "";
   for (var i = 0; i < numbPlayers; i++) {
-    var playerName = "______";
-    if (round == 0) {
-      playerName = players[i].name;
-    };
-    html = html + "<div id=" + round + "m" + i + i +"><input type=text id=" + round + "m" + i + 
-    " oninput=progresser(this.id) value=\"0\" style=\"width:25%\" name=" + 
-    playerName +"><span>" + playerName + "</span></input></div>";
+    html = html + "<div id=" + round + "m" + i + i +">";
+    if (numbPlayers == 1) {
+      html = html + "<span id=" + round + "m" + i + ">Winner: </span><span>" + "____" + "</span>";
+    } else {
+      html = html + matchInput(round,i,players);
+    }
+    html = html + "</div>";
   };
   return html;
 }
 
+function matchInput(round,i,players){
+  var playerName = "__"
+  if (round == 0) {
+    playerName = players[i].name;
+  };
+  var html = "<input type=number placeholder=0 class=throwValue id=" + round + "m" + i + 
+  " oninput=tournamentNameSpace.progresser(this.id) name=" + 
+  playerName +"><span>" + playerName + "</span></input>";
+  return html;
+}
+
+// returns the id of the winner.
 function selectLargest(firstId) {
   var first = document.getElementById(firstId).value;
   var secondId = loserId(firstId);
@@ -107,20 +137,6 @@ function progresser(inId) {
   document.getElementById(lId).name = ll.name;
   document.getElementById(lId).nextSibling.innerHTML = ll.name;
   document.getElementById(lId).innerHTML = document.getElementById(loser).value;
-}
-
-// Moves a winning player to the next round.
-function progress(id){
-  var newId = id.split('m');
-  var newSlot = findNext(parseInt(newId[1]));
-  var nextRound = parseInt(newId[0]) + 1;
-  var nextId = nextRound + "m" + newSlot;
-  var winner = document.getElementById(id);
-  document.getElementById(nextId).innerHTML = winner.innerHTML;
-  var loser = loserId(id);
-  var lId = moveLoser(loser);
-  var ll = document.getElementById(loser);
-  document.getElementById(lId).innerHTML = ll.innerHTML;
 }
 
 // creates html elements for each loser bracket round.
@@ -175,6 +191,7 @@ function findNext(id){
   return newId;
 }
 
+
 function isOdd(num) {
   var result = false;
   if (num % 2 == 1) {
@@ -185,7 +202,6 @@ function isOdd(num) {
 
 // Return the amount of times a list can be divided by 2.
 function findDepth(size){
-  //size = players.length;
   depth = 1;
   while (size/2 % 2 == 0) {
     size = size/2;
@@ -194,7 +210,7 @@ function findDepth(size){
   return depth;
 }
 
-// Player object generator. #TODO add id field?
+// Player object generator. #TODO add id field? "prior rank"/"tournament rank"? Use tournament rank as a means in order to move setup endgame after qualifiers etc.
 class Player {
   constructor(name,rank,recentThrow,longestThrow,lost){
     this.name = name;
@@ -207,8 +223,46 @@ class Player {
 
 // Creates a list of object representing the contenders.
 function createPlayerList(players){
-  var playerList = players.map(x => new Player(x,undefined,undefined,undefined,false));
+  if (players === null) {
+    alert("Please enter a csv file.")
+  }
+  var playerList = players.map(x => new Player(x["player"],parseInt(x["rank"]),undefined,undefined,false));
   return playerList;
 }
 
+
+function createExamplePlayers(size) {
+  var players = [];
+  for (let i = 0; i < size; i++) {
+    var rank = i + 1;
+    var fakePlayer = "p" + rank;
+    players[i] = new Player(fakePlayer,rank,undefined,undefined,false);
+  };
+  return players;
+}
+
+function setEightPlayers() {
+  var playersExample = createExamplePlayers(8);
+  return playersExample;
+}
+
 //----------- work in progress -------------- file conversion.
+
+return{
+  trigModal:trigModal,
+  hideModal:hideModal,
+  progresser:progresser,
+  upload:upload,
+  setEightPlayers:setEightPlayers,
+}
+
+}();
+
+// Event listerners
+window.onload = function (){
+document.getElementById("settings").addEventListener("click", tournamentNameSpace.trigModal);
+document.getElementById("hideModal").addEventListener("click", tournamentNameSpace.hideModal);
+
+document.getElementById("input").addEventListener("change", tournamentNameSpace.upload, false);
+
+};

@@ -1,16 +1,20 @@
-Out of N contenders, n qualifies(longest throw of 3) and moves on to brackets depending on preexisting ranking.
-- Create qualifier rounds
-- Store  round losers/winners and throws
+Import a csv file containing names and ranks.
+	- https://cmatskas.com/importing-csv-files-using-jquery-and-html5/
+	- move eventlisemer to closeModal button.
 
+Moving Logic:
+	Loser bracket should be determend by iterating throught the playerList objects at some point
+
+
+Add Qualifications:
+	- For kastere uten eksisterende ranking, eller for lav rank til å få "legend" spot
+	- gruppe spill hvor lucky losers blir flettet inn? ut i fra hvordan dies lengste kast var?
+	- Has to reduce a large amount of player to a small tournament setup.
 
 Add cookies, so that the tournament progress is not lost when ever the page is refreshed.
-
 add warnings to wrong inputs etc
 
-
-qualification:
-	Configure inital bracket depening on ranking.
-	The lucky losers should be icorporated in the final tree.
+create a box around each match, when a winner is selected change the box around the player to green vs red accordingly.
 
 
 bracket library:
