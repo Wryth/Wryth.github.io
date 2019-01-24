@@ -6,8 +6,10 @@ $(document).ready(function() {
 // Revealing module module pattern.
 tournamentNameSpace = function(){
 
+// Module variables
   var playerObjectList = [];
   var data = null;
+
 
 // Triggers the settings option Modal.
 function trigModal(){
@@ -60,7 +62,8 @@ function newStyle(players){
     var id = "round" + i;
     var left = i * 200 + "px";
     document.getElementById(id).style.left = left;
-    document.getElementById(id).style.position = "absolute";
+    document.getElementById(id).style.position = "static";
+    document.getElementById(id).style.float = "left";
   }
 }
 
@@ -254,6 +257,7 @@ return{
   progresser:progresser,
   upload:upload,
   setEightPlayers:setEightPlayers,
+  //testInput11:testInput11,
 }
 
 }();
@@ -266,3 +270,30 @@ document.getElementById("hideModal").addEventListener("click", tournamentNameSpa
 document.getElementById("input").addEventListener("change", tournamentNameSpace.upload, false);
 
 };
+
+test = function(){
+
+function testInput11() {
+  document.getElementById("0m10").value = 10;
+  if (document.getElementById("1m5").name === "p11") {
+    console.log("Test Passed");  
+  } else {
+    console.log("Test Failed");
+  };
+}
+
+function testInputs(used,moved,realName) {
+  document.getElementById(used).value = 10;
+  if (document.getElementById(moved).name === realName) {
+    console.log("Test Passed");  
+  } else {
+    console.log("Test Failed");
+  };
+}
+
+
+return{
+  testInputs:testInputs,
+  testInput11:testInput11
+}
+}();

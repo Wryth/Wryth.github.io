@@ -5,7 +5,6 @@ html{
 }
 
 body{
-  /*background-image: url("img/dark_water-wallpaper-1920x1080.jpg");*/
   position: absolute;
   height: 100%;
   width: 100%;
@@ -13,14 +12,13 @@ body{
 
 #box{
   position: relative;
-  /*overflow: hidden;*/
-  height: 100%;
   width: 100%;
+  overflow: auto;
 }
 
 #finals{
   position: relative;
-  height: 50%;
+  overflow: auto;
 }
 
 .modal{
@@ -51,12 +49,9 @@ button{
 
 #loserbracketBox{
   position: relative;
+  float: left;
   height: 100%;
   width: 100%;
-}
-
-#loserbracket{
-
 }
 
 .throwValue{
