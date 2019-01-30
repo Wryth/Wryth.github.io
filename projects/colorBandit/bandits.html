@@ -3,6 +3,7 @@
   <head>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script> <!-- include jStat, from the CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.0.1/lib/jspdf.js"></script><!--include highCharts, from CDN-->
     <script src="banditsScript.js"></script>
     <link rel="stylesheet" href="styles.css">
 
@@ -12,16 +13,23 @@
 
   <body>
     <header>
+      <button id="shadeButton" class="pickerButtonClass" type="button">Shade</button>
       <button id="exportPaletteButton" class="pickerButtonClass" type="button">Export</button>
       <button id="resetButton" class="pickerButtonClass" type="button">Reset</button>
-      <button id="infoButton" class="pickerButtonClass" type="button">info</button>
+      <button id="infoButton" class="pickerButtonClass" type="button">Info</button>
     </header>
 
-    <div id="palettePos0" class="paletteColors"></div>
-    <div id="palettePos1" class="paletteColors"></div>
-    <div id="palettePos2" class="paletteColors"></div>
-    <div id="palettePos3" class="paletteColors"></div>
-    <div id="palettePos4" class="paletteColors"></div>
+    <div id="palette">
+        <div id="palettePos0" class="paletteColors"></div>
+        <div id="palettePos1" class="paletteColors"></div>
+        <div id="palettePos2" class="paletteColors"></div>
+        <div id="palettePos3" class="paletteColors"></div>
+        <div id="palettePos4" class="paletteColors"></div>
+        <div id="palettePos5" class="paletteColors"></div>
+        <div id="palettePos6" class="paletteColors"></div>
+        <div id="palettePos7" class="paletteColors"></div>
+        <div id="palettePos8" class="paletteColors"></div>
+    </div>
 
     <div id="colorBox"><!--Change to colorCard, create a shadesBox/tintBox-->
       <div id="box">
@@ -29,6 +37,14 @@
       <p id="sampleColor"></p>
       <p id="meanColor"></p>
       </div>
+    </div>
+
+    <div id="shadesBox">
+      <button id="shade0" class="shade"></button>
+      <button id="shade1" class="shade"></button>
+      <button id="shade2" class="shade"></button>
+      <button id="shade3" class="shade"></button>
+      <button id="shade4" class="shade"></button>
     </div>
 
     <footer>
